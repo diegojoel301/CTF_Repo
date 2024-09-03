@@ -1,0 +1,30 @@
+.nav {
+	display: flex;
+	flex-direction: row;
+	align-items: center;
+	gap: 12px;
+	height: 100%;
+
+	.link {
+		color: #e17f16;
+		font-family: "Mukta", sans-serif;
+		font-size: 16px;
+		text-decoration: none;
+		cursor: pointer;
+		border-bottom: 2px solid transparent;
+		transition: color 0.2s ease, border-bottom-color 0.2s ease;
+
+		&:visited {
+			color: #e17f16;
+		}
+
+		&:hover {
+			color: #ff992d;
+		}
+
+		&.active {
+			color: #ff992d;
+			border-bottom: 2px solid #ff992d;
+		}
+	}
+}

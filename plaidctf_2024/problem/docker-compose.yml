@@ -1,0 +1,37 @@
+services:
+  db:
+    image: werechat/db
+    build:
+      context: ./db
+    restart: always
+    environment:
+      - POSTGRES_USER=postgres
+      - POSTGRES_PASSWORD=${POSTGRES_PASSWORD:-postgres}
+      - POSTGRES_DB=werechat
+  app:
+    image: werechat/app
+    build:
+      context: ./app
+    depends_on:
+      - db
+    restart: always
+    environment:
+      - POSTGRES_URL=postgres://postgres:${POSTGRES_PASSWORD:-postgres}@db:5432/werechat
+      - SENDGRID_API_KEY=${SENDGRID_API_KEY:-}
+    ports:
+      - "3000:80"
+  bot:
+    image: werechat/bot
+    build:
+      context: ./bot
+    depends_on:
+      - db
+      - app
+    restart: always
+    environment:
+      - POSTGRES_URL=postgres://postgres:${POSTGRES_PASSWORD:-postgres}@db:5432/werechat
+      - FLAG=${WERECHAT_FLAG:-PCTF{werechat_test_flag}}
+      - APP_HOST=${APP_HOST:-app}
+    ports:
+      - "3001:80"
+

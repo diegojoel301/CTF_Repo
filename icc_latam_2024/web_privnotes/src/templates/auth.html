@@ -1,0 +1,87 @@
+{% extends "base.html" %} {% block content %}
+<div class="mt-1 mx-auto w-full max-w-sm">
+  <form class="space-y-6" method="POST">
+    <h2>
+      {% if action == "login" %} Log in to your account {% else %} Register to
+      create an account {% endif %}
+    </h2>
+    {% for error in errors %}
+    <div class="rounded-md bg-red-50 p-4">
+      <div class="flex">
+        <div class="flex-shrink-0">
+          <!-- Heroicon name: solid/x-circle -->
+          <svg
+            class="h-5 w-5 text-red-400"
+            xmlns="http://www.w3.org/2000/svg"
+            viewBox="0 0 20
+                            20"
+            fill="currentColor"
+            aria-hidden="true"
+          >
+            <path
+              fill-rule="evenodd"
+              d="M10 1a9 9 0 100 18 9 9 0 000-18zm1
+                                13a1 1 0 11-2 0 1 1 0 012 0zm-1-3a1
+                                1 0 100-2 1 1 0 000 2z"
+              clip-rule="evenodd"
+            />
+          </svg>
+        </div>
+        <div class="ml-3">
+          <h3 class="text-sm font-medium text-red-800">{{ error }}</h3>
+        </div>
+      </div>
+    </div>
+    {% endfor %}
+
+    <div>
+      <label
+        for="username"
+        class="block text-sm font-medium leading-6 text-white"
+        >Username</label
+      >
+      <div class="mt-2">
+        <input
+          id="username"
+          name="username"
+          type="username"
+          autocomplete="username"
+          required
+          class="block w-full rounded-md border-0 bg-white/5 p-1.5 text-white shadow-sm ring-1 ring-inset ring-white/10 focus:ring-2 focus:ring-inset focus:ring-gray-500 text-sm leading-6"
+        />
+      </div>
+    </div>
+
+    {% if action == "login" %}
+    <div>
+      <div class="flex items-center justify-between">
+        <label
+          for="password"
+          class="block text-sm font-medium leading-6 text-white"
+          >Password</label
+        >
+      </div>
+      <div class="mt-2">
+        <input
+          id="password"
+          name="password"
+          type="password"
+          autocomplete="current-password"
+          required
+          class="block w-full rounded-md border-0 bg-white/5 p-1.5 text-white shadow-sm ring-1 ring-inset ring-white/10 focus:ring-2 focus:ring-inset focus:ring-gray-500 text-sm leading-6"
+        />
+      </div>
+    </div>
+    {% endif %}
+
+    <div>
+      <button
+        type="submit"
+        class="flex w-full justify-center rounded-md bg-gray-500 px-3 py-1.5 text-sm font-semibold leading-6 text-white shadow-sm hover:bg-gray-400 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-gray-500"
+      >
+        Sign in
+      </button>
+    </div>
+  </form>
+</div>
+{% endblock %}

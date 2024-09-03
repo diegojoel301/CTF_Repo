@@ -1,0 +1,6 @@
+# Dirsearch started Mon Apr 22 15:03:07 2024 as: /home/diegojoel301/.local/bin/dirsearch -u http://blindmaze.challs.open.ecsc2024.it/
+
+404     0B   http://blindmaze.challs.open.ecsc2024.it/.well-known/acme-challenge/dtfy
+404   564B   http://blindmaze.challs.open.ecsc2024.it/static/api/swagger.yaml
+404   564B   http://blindmaze.challs.open.ecsc2024.it/static/dump.sql
+404   564B   http://blindmaze.challs.open.ecsc2024.it/static/api/swagger.json

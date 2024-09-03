@@ -1,0 +1,23 @@
+{% extends "base.html" %} {% block content %}
+<ul role="list" class="divide-y divide-gray-800 w-full">
+  {% for user in users %} {% with user = user.serialize %}
+  <li class="flex justify-between gap-x-6 py-5">
+    <div class="flex flex-grow gap-x-4">
+      <div class="min-w-0">
+        <p class="text-sm font-semibold leading-6 truncate text-gray-100">
+          {{ user.username }}
+        </p>
+      </div>
+    </div>
+    <div class="flex-col flex-1">
+      <p class="mt-1 text-xs leading-5 text-gray-500">
+        Registered on
+        <time raw="{{ user.registration_date }}"
+          >{{ user.printable_registration_date }}</time
+        >
+      </p>
+    </div>
+  </li>
+  {% endwith %} {% endfor %}
+</ul>
+{% endblock %} ```

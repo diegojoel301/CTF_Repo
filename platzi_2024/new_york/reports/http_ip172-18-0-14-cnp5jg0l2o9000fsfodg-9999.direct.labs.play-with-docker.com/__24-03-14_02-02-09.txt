@@ -1,0 +1,4 @@
+# Dirsearch started Thu Mar 14 02:03:32 2024 as: /home/diegojoel301/.local/bin/dirsearch -u http://ip172-18-0-14-cnp5jg0l2o9000fsfodg-9999.direct.labs.play-with-docker.com/
+
+301   169B   http://ip172-18-0-14-cnp5jg0l2o9000fsfodg-9999.direct.labs.play-with-docker.com/assets    -> REDIRECTS TO: http://ip172-18-0-14-cnp5jg0l2o9000fsfodg-9999.direct.labs.play-with-docker.com:9999/assets/
+200   378B   http://ip172-18-0-14-cnp5jg0l2o9000fsfodg-9999.direct.labs.play-with-docker.com/assets/

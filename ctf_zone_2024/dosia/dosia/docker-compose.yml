@@ -1,0 +1,8 @@
+version: "3.9"
+services:
+  dosia:
+    privileged: true
+    container_name: dosia
+    build: .
+    ports:
+      - "4541:1337"

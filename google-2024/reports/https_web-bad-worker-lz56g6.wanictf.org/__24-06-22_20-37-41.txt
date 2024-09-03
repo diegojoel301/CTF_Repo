@@ -1,0 +1,7 @@
+# Dirsearch started Sat Jun 22 20:40:04 2024 as: /home/diegojoel301/.local/bin/dirsearch -u https://web-bad-worker-lz56g6.wanictf.org/
+
+301   169B   https://web-bad-worker-lz56g6.wanictf.org/css    -> REDIRECTS TO: http://web-bad-worker-lz56g6.wanictf.org/css/
+200   133B   https://web-bad-worker-lz56g6.wanictf.org/Dockerfile
+200     5KB  https://web-bad-worker-lz56g6.wanictf.org/favicon.ico
+301   169B   https://web-bad-worker-lz56g6.wanictf.org/img    -> REDIRECTS TO: http://web-bad-worker-lz56g6.wanictf.org/img/
+200   413B   https://web-bad-worker-lz56g6.wanictf.org/manifest.json

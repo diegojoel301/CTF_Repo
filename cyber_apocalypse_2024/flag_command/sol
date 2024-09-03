@@ -1,0 +1,1 @@
+❯ curl "http://94.237.59.119:44090/api/monitor" -X POST -H "Content-Type: application/json" -d@data.json

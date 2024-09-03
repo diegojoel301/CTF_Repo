@@ -1,0 +1,84 @@
+.create-room-dialog {
+	background: #141414;
+	border: 0px;
+	box-shadow: 0px 0px 16px rgba(0, 0, 0, 0.5);
+
+	&::backdrop {
+		background: rgba(0, 0, 0, 0.5);
+	}
+
+	.form {
+		.title {
+			font-family: "Truculenta", sans-serif;
+			color: #e17f16;
+			font-size: 26px;
+			font-weight: 700;
+			padding: 16px;
+			text-align: center;
+		}
+
+		.field {
+			margin-bottom: 8px;
+
+			.label {
+				font-family: "Mukta", sans-serif;
+				font-size: 16px;
+				color: #a0a0a0;
+				padding: 8px 16px;
+			}
+
+			.input {
+				font-size: 16px;
+				color: white;
+				font-family: "Mukta", sans-serif;
+				border: 0px;
+				background: #2b2b2b;
+				border-radius: 2px;
+				outline: none;
+				padding: 4px 8px;
+				width: 200px;
+
+				&::placeholder {
+					color: #a0a0a0;
+				}
+			}
+		}
+
+		.buttons {
+			display: flex;
+			justify-content: flex-end;
+			gap: 8px;
+
+			.button {
+				display: block;
+				font-size: 16px;
+				font-family: "Mukta", sans-serif;
+				border: 0px;
+				border-radius: 2px;
+				outline: none;
+				padding: 8px;
+				border: 1px solid #a0a0a0;
+				color: #d0d0d0;
+				width: 100%;
+				background: transparent;
+				cursor: pointer;
+				transition: border-color 0.2s ease, color 0.2s ease, background 0.2s ease;
+
+				&:hover {
+					border-color: #e17f16;
+					color: #e17f16;
+				}
+
+				&.primary {
+					background: #e17f16;
+					color: #ffffff;
+					border: 0px;
+
+					&:hover {
+						background: #ff9f2a;
+					}
+				}
+			}
+		}
+	}
+}

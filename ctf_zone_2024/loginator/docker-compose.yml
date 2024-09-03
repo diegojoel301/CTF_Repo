@@ -1,0 +1,6 @@
+services:
+  task:
+    build: .
+    restart: unless-stopped
+    ports: 
+      - "15557:15557"

@@ -1,0 +1,181 @@
+diff --git a/content/browser/BUILD.gn b/content/browser/BUILD.gn
+index 400ca8001ef49..fae4243d984b7 100644
+--- a/content/browser/BUILD.gn
++++ b/content/browser/BUILD.gn
+@@ -2367,6 +2367,8 @@ source_set("browser") {
+     "worker_host/worker_script_loader.h",
+     "worker_host/worker_script_loader_factory.cc",
+     "worker_host/worker_script_loader_factory.h",
++    "ultimatinator/ultimatinator_impl.cc",
++    "ultimatinator/ultimatinator_impl.h",
+   ]
+ 
+   if (use_starscan) {
+diff --git a/content/browser/renderer_host/render_frame_host_impl.cc b/content/browser/renderer_host/render_frame_host_impl.cc
+index 6a86e6f5f78cd..c501c25604625 100644
+--- a/content/browser/renderer_host/render_frame_host_impl.cc
++++ b/content/browser/renderer_host/render_frame_host_impl.cc
+@@ -165,6 +165,7 @@
+ #include "content/browser/worker_host/dedicated_worker_host.h"
+ #include "content/browser/worker_host/dedicated_worker_host_factory_impl.h"
+ #include "content/browser/worker_host/dedicated_worker_hosts_for_document.h"
++#include "content/browser/ultimatinator/ultimatinator_impl.h"
+ #include "content/common/associated_interfaces.mojom.h"
+ #include "content/common/content_navigation_policy.h"
+ #include "content/common/debug_utils.h"
+@@ -1543,7 +1544,7 @@ RenderFrameHostImpl* RenderFrameHostImpl::FromOverlayRoutingToken(
+ 
+ // static
+ //
+-void RenderFrameHostImpl::PrepareUltimate(mojo::PendingReveiver<blink::mojom::Ultimatinator> receiver){
++void RenderFrameHostImpl::PrepareUltimate(mojo::PendingReceiver<blink::mojom::Ultimatinator> receiver){
+   UltimatinatorImpl::Prepare(std::move(receiver));
+ }
+ 
+diff --git a/content/browser/renderer_host/render_frame_host_impl.h b/content/browser/renderer_host/render_frame_host_impl.h
+index 13f0dc7cfbef1..eb2ed7a105958 100644
+--- a/content/browser/renderer_host/render_frame_host_impl.h
++++ b/content/browser/renderer_host/render_frame_host_impl.h
+@@ -187,7 +187,8 @@
+ #include "ui/base/page_transition_types.h"
+ #include "ui/gfx/geometry/rect.h"
+ #include "url/gurl.h"
+-
++#include "third_party/blink/public/mojom/ultimatnator/ultimatinator.mojom.h"
++#include "content/browser/ultimatinator/ultimatinator_impl.h"
+ #if BUILDFLAG(IS_ANDROID)
+ #include "base/containers/id_map.h"
+ #include "content/browser/webauth/webauth_request_security_checker.h"
+diff --git a/content/browser/ultimatinator/ultimatinator_impl.cc b/content/browser/ultimatinator/ultimatinator_impl.cc
+index 817a90c068600..ec72a80628d24 100644
+--- a/content/browser/ultimatinator/ultimatinator_impl.cc
++++ b/content/browser/ultimatinator/ultimatinator_impl.cc
+@@ -2,28 +2,53 @@
+ #include "mojo/public/cpp/bindings/self_owned_receiver.h"
+ #include "content/public/browser/browser_task_traits.h"
+ #include "content/public/browser/browser_thread.h"
++#include <string>
+ 
+ namespace content {
+ 
+-void UltimatinatorImpl::Prepare(mojo::PendingReceiver<blink::mojom::Ultimatinator>receiver){
+-
++size_t UltimatinatorImpl::trainee_cnt = 0;
+ 
++UltimatinatorImpl::UltimatinatorImpl(){
++  UltimatinatorImpl::trainee_cnt++;
+ }
+ 
+-void UltimatinatorImpl::GetHeap(GetHeapCallback callback){
+-
+-
++UltimatinatorImpl::~UltimatinatorImpl(){
++  UltimatinatorImpl::trainee_cnt--;
+ }
+ 
+-void UltimatinatorImpl::GetText(GetTextCallback callback){
+-
+-
++void UltimatinatorImpl::Prepare(mojo::PendingReceiver<blink::mojom::Ultimatinator>receiver){
++  auto self = std::make_unique<UltimatinatorImpl>();
++  mojo::MakeSelfOwnedReceiver(std::move(self), std::move(receiver));
+ }
+ 
+-void UltimatinatorImpl::FindTrainee(FindTraineeCallback callback){
++void UltimatinatorImpl::GetHeap(GetHeapCallback callback) {
++  std::move(callback).Run((uint64_t)(this));
++}
+ 
++void UltimatinatorImpl::GetText(GetTextCallback callback) {
++  std::move(callback).Run((uint64_t)(&UltimatinatorImpl::Prepare));
++}
+ 
++void UltimatinatorImpl::FindSecret(uint32_t id,FindSecretCallback callback) {
++  std::string str;
++
++  for(auto* secret : ultimated){
++    if(secret->id == id){
++      str = std::string{secret->data};
++      delete secret;
++      break;
++    }
++  }
++  std::move(callback).Run(str);
+ }
+ 
++void UltimatinatorImpl::BecomeUltimate(std::vector<blink::mojom::TraineePtr> trainees) {
++  if(ultimated.size() >= 50)
++    return;
++  for(auto& trainee : trainees){
++    std::string newx(trainee->secret.begin(),trainee->secret.end());
++    ultimated.push_back(new Secret{trainee->id,newx});
++  }
++}
+ 
+ } //content
+diff --git a/content/browser/ultimatinator/ultimatinator_impl.h b/content/browser/ultimatinator/ultimatinator_impl.h
+index bceeb591bc642..f4635eacd600f 100644
+--- a/content/browser/ultimatinator/ultimatinator_impl.h
++++ b/content/browser/ultimatinator/ultimatinator_impl.h
+@@ -1,22 +1,39 @@
+-#include "third_party/blink/public/mojom/sandbox/ultimatinator.mojom.h"
++#include <string>
++#include <string.h>
++#include "third_party/blink/public/mojom/ultimatnator/ultimatinator.mojom.h"
+ 
+ #ifndef CONTENT_BROWSER_ULTIMATINATOR_IMPL_H_
+ #define CONTENT_BROWSER_ULTIMATINATOR_IMPL_H_
+ 
+ namespace content {
++  class Secret {
++    public:
++      uint32_t id;
++      raw_ptr<char> data;
++      explicit Secret(uint32_t id,std::string& str):id(id){
++        memset(padding,0,0x300);
++        data = new char[str.size()+1];
++        memcpy(data,str.c_str(),str.size());
++      }
++      ~Secret() {
++        delete[] data.get();
++      }
++      char padding[0x300];
++  };
+ 
+-  class CONTENT_EXPORT UltimatinatorImpl : public blink::mojom::Ultimatinator {
++  class UltimatinatorImpl : public blink::mojom::Ultimatinator {
+     public:
+-      static size_t trainee_cnt = 0;
++      static size_t trainee_cnt;
+       UltimatinatorImpl();
+       ~UltimatinatorImpl() override;
+-      void Prepare(mojo::PendingReceiver<blink::mojom::Ultimatinator> receiver);
+-      void BecomeUltimate(std::vector<TraineePtr> trainees) override;
+-      void GetHeap(GetTextCallback callback) override;
+-      void GetText(GetHeapCallback callback) override;
+-      void FindTrainee(FindTraineeCallback callback) override;
+-
++      static void Prepare(mojo::PendingReceiver<blink::mojom::Ultimatinator> receiver);
++      void BecomeUltimate(std::vector<blink::mojom::TraineePtr> trainees) override;
++      void GetHeap(GetHeapCallback callback) override;
++      void GetText(GetTextCallback callback) override;
++      void FindSecret(uint32_t id,FindSecretCallback callback) override;
++    private:
++      std::vector<Secret*>ultimated;
++      char padding[0x200];
+   };
+-
+ } //namespace content
+ #endif
+diff --git a/third_party/blink/public/mojom/BUILD.gn b/third_party/blink/public/mojom/BUILD.gn
+index 7a1ef0b32d99d..8a436ac41f6f2 100644
+--- a/third_party/blink/public/mojom/BUILD.gn
++++ b/third_party/blink/public/mojom/BUILD.gn
+@@ -256,6 +256,7 @@ mojom("mojom_platform") {
+     "worker/worker_main_script_load_params.mojom",
+     "worker/worker_options.mojom",
+     "worker/worklet_global_scope_creation_params.mojom",
++    "ultimatnator/ultimatinator.mojom",
+   ]
+ 
+   if (is_android) {

@@ -1,0 +1,70 @@
+.register {
+	.register-container {
+		width: 100%;
+		height: 100%;
+		display: flex;
+		justify-content: center;
+		align-items: center;
+
+		.register-form {
+			background: #141414;
+			padding: 24px;
+			border-radius: 2px;
+
+			.title {
+				font-family: "Truculenta", sans-serif;
+				color: #e17f16;
+				background: -webkit-linear-gradient(270deg, #ff992d 30%, #e17f16 75%, #a66618);
+				-webkit-background-clip: text;
+				-webkit-text-fill-color: transparent;
+				font-weight: 700;
+				font-variation-settings: "wdth" 110;
+				font-size: 32px;
+				text-align: center;
+				margin-bottom: 12px;
+			}
+
+			.invite-code,
+			.username,
+			.email,
+			.password {
+				display: block;
+				font-size: 16px;
+				color: white;
+				margin-bottom: 8px;
+				font-family: "Mukta", sans-serif;
+				border: 0px;
+				background: #2b2b2b;
+				border-radius: 2px;
+				outline: none;
+				padding: 8px;
+				width: 200px;
+
+				&::placeholder {
+					color: #a0a0a0;
+				}
+			}
+
+			.submit {
+				display: block;
+				font-size: 16px;
+				font-family: "Mukta", sans-serif;
+				border: 0px;
+				border-radius: 2px;
+				outline: none;
+				padding: 8px;
+				border: 1px solid #a0a0a0;
+				color: #d0d0d0;
+				width: 100%;
+				background: transparent;
+				cursor: pointer;
+				transition: border-color 0.2s ease, color 0.2s ease;
+
+				&:hover {
+					border-color: #e17f16;
+					color: #e17f16;
+				}
+			}
+		}
+	}
+}

@@ -1,0 +1,55 @@
+.room-list {
+	display: flex;
+	flex-direction: column;
+	overflow-y: auto;
+	height: 100%;
+
+	.room {
+		font-family: 'Mukta', sans-serif;
+		font-size: 16px;
+		background: #212121;
+		padding: 4px 16px;
+		color: #a0a0a0;
+		cursor: pointer;
+
+		.unread {
+			font-size: 12px;
+			margin-left: 6px;
+			color: #e17f16;
+		}
+
+		&:hover {
+			background: #1a1a1a;
+		}
+
+		&.selected {
+			color: #ffffff;
+			background: #121212;
+		}
+	}
+
+	.create-room {
+		margin-top: auto;
+		font-family: 'Mukta', sans-serif;
+		font-size: 16px;
+		background: #212121;
+		color: #a0a0a0;
+		cursor: pointer;
+		transition: color 0.2s ease, background 0.2s ease;
+		display: flex;
+		justify-content: center;
+		align-items: center;
+		gap: 4px;
+		padding: 12px 16px;
+
+		&:hover {
+			background: #303030;
+			color: #ffffff;
+		}
+
+		.icon {
+			font-family: "Material Symbols Outlined";
+			font-variation-settings: 'FILL' 1, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+		}
+	}
+}

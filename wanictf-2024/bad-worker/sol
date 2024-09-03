@@ -1,0 +1,2 @@
+curl "https://web-bad-worker-lz56g6.wanictf.org/service-worker.js"
+curl https://web-bad-worker-lz56g6.wanictf.org/FLAG.txt

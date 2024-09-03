@@ -1,0 +1,15 @@
+version: '3.3'
+services:
+  pontius:
+    read_only: true
+    build: ./task
+    container_name: pontius
+    restart: always
+    ports:
+      - 41337:1337
+    deploy:
+      resources:
+        limits:
+          cpus: "1"
+          memory: "512M"
+
