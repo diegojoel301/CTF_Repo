@@ -1,0 +1,49 @@
+*RAX  0x7939564253475041 ('APGSBV9y')
+ RBX  0
+ RCX  0
+ RDX  0x7fffffffdfd8 —▸ 0x7fffffffe30d ◂— '/home/diegojoel301/CTF_Repo/ccbol_preclasificatorio/Tetris'
+ RDI  0x555555555120 ◂— sub rsp, 8
+ RSI  1
+ R8   0
+ R9   0x7ffff7fcf680 (_dl_fini) ◂— push rbp
+ R10  0x7ffff7fcb7d0 ◂— 0xc0012000000c1
+ R11  0x202
+ R12  0x555555555140 ◂— endbr64 
+ R13  0x7fffffffdfd0 ◂— 1
+ R14  0
+ R15  0
+ RBP  0x7fffffffdfb8 ◂— 0
+ RSP  0x7fffffffdf98 ◂— 0
+*RIP  0x555555555449 ◂— movabs rdx, 0x6567726733727876
+───────────────────────────────────────────────────────────────────────────[ DISASM / x86-64 / set emulate on ]────────────────────────────────────────────────────────────────────────────
+   0x55555555542c    sub    rsp, 0x20                            RSP => 0x7fffffffdf98 (0x7fffffffdfb8 - 0x20)
+   0x555555555430    mov    rax, qword ptr fs:[0x28]             RAX, [0x7ffff7dcb768] => 0x64dfd88b07945500
+   0x555555555439    mov    qword ptr [rbp - 8], rax             [0x7fffffffdfb0] => 0x64dfd88b07945500
+   0x55555555543d    xor    eax, eax                             EAX => 0
+   0x55555555543f    movabs rax, 0x7939564253475041              RAX => 0x7939564253475041 ('APGSBV9y')
+ ► 0x555555555449    movabs rdx, 0x6567726733727876              RDX => 0x6567726733727876 ('vxr3grge')
+   0x555555555453    mov    qword ptr [rbp - 0x20], rax          [0x7fffffffdf98] => 0x7939564253475041 ('APGSBV9y')
+   0x555555555457    mov    qword ptr [rbp - 0x18], rdx          [0x7fffffffdfa0] => 0x6567726733727876 ('vxr3grge')
+   0x55555555545b    mov    dword ptr [rbp - 0x10], 0x306676     [0x7fffffffdfa8] => 0x306676
+   0x555555555462    lea    rax, [rbp - 0x20]                    RAX => 0x7fffffffdf98 ◂— 0x7939564253475041 ('APGSBV9y')
+   0x555555555466    mov    rdi, rax                             RDI => 0x7fffffffdf98 ◂— 0x7939564253475041 ('APGSBV9y')
+─────────────────────────────────────────────────────────────────────────────────────────[ STACK ]─────────────────────────────────────────────────────────────────────────────────────────
+00:0000│ rsp 0x7fffffffdf98 ◂— 0
+01:0008│-018 0x7fffffffdfa0 ◂— 0
+02:0010│-010 0x7fffffffdfa8 —▸ 0x555555555140 ◂— endbr64 
+03:0018│-008 0x7fffffffdfb0 ◂— 0x64dfd88b07945500
+04:0020│ rbp 0x7fffffffdfb8 ◂— 0
+05:0028│+008 0x7fffffffdfc0 —▸ 0x7fffffffdfc8 ◂— 0x38 /* '8' */
+06:0030│+010 0x7fffffffdfc8 ◂— 0x38 /* '8' */
+07:0038│ r13 0x7fffffffdfd0 ◂— 1
+───────────────────────────────────────────────────────────────────────────────────────[ BACKTRACE ]───────────────────────────────────────────────────────────────────────────────────────
+ ► 0   0x555555555449 None
+   1   0x7fffffffdfc8 None
+   2             0x38 None
+   3              0x1 None
+   4   0x7fffffffe30d None
+   5              0x0 None
+───────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────
+pwndbg> c
+Continuing.
+NCTF{I_like_tetris}
