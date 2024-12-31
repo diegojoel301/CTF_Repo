@@ -1,0 +1,5 @@
+services:
+    pwn:
+        build: ./challenge
+        ports:
+            - 1338:1338

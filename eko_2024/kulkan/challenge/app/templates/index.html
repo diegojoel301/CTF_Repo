@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>1337 h4x!!</title>
+    <link rel="stylesheet" href="../static/style.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Press+Start+2P&display=swap" rel="stylesheet">
+  </head>
+
+  <body>
+    <h1>1337 h4x0r t00ls</h1>
+    <form method="GET">
+      <table>
+        <tr>
+          <td>
+            <label for="host">Target (Hostname/IP):</label><br>
+          </td>
+          <td>
+            <input type="text" id="host" name="host" required>
+          </td>
+        </tr>
+        <tr>
+          <td>
+            <label for="command">Select Command:</label>
+          </td>
+          <td class="centered-td">
+            <select id="command" name="command" required>
+              <option value="nmap">nmap</option>
+              <option value="dig">dig</option>
+              <option value="ping">ping</option>
+            </select>
+          </td>
+        </tr>
+        <tr>
+          <td colspan="2" class="centered-td">
+            <button class="cybr-btn">
+              Run<span aria-hidden>_</span>
+              <span aria-hidden class="cybr-btn__glitch">run_</span>
+              <span aria-hidden class="cybr-btn__tag">kulkan</span>
+            </button>
+          </td>
+        </tr>
+      </table>
+    </form>
+
+    {% if output %}
+        <h2>Scan Result:</h2>
+        <pre>{{ output }}</pre>
+    {% endif %}
+    
+    <div class="gif-container">
+      <img src="https://media2.giphy.com/media/v1.Y2lkPTc5MGI3NjExajl0eWt1dTJ5aHU1cmViZTl0dHM0M295NWk1a2ZnNW80cGozbG16bSZlcD12MV9pbnRlcm5hbF9naWZfYnlfaWQmY3Q9Zw/po9RznauAcPrHS7oVw/giphy.webp" width="480" height="322" alt="GIF">
+    </div>
+
+  </body>
+</html>
+

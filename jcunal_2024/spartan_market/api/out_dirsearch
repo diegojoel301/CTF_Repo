@@ -1,0 +1,18 @@
+dirsearch --url https://1u53gb91ge.execute-api.us-east-1.amazonaws.com
+
+  _|. _ _  _  _  _ _|_    v0.4.2
+ (_||| _) (/_(_|| (_| )
+
+Extensions: php, aspx, jsp, html, js | HTTP method: GET | Threads: 30 | Wordlist size: 10927
+
+Output File: /home/diegojoel301/.dirsearch/reports/1u53gb91ge.execute-api.us-east-1.amazonaws.com/_24-11-22_01-12-56.txt
+
+Error Log: /home/diegojoel301/.dirsearch/logs/errors-24-11-22_01-12-56.log
+
+Target: https://1u53gb91ge.execute-api.us-east-1.amazonaws.com/
+
+[01:12:58] Starting: 
+[01:13:25] 200 -    5KB - /dashboard
+[01:13:41] 200 -   18B  - /ping
+[01:13:43] 200 -    5KB - /products
+[01:13:51] 200 -    3KB - /users

