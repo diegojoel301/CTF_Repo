@@ -1,0 +1,12 @@
+-1
+pwndbg> search -8 0x4242424242424242
+Searching for an 8-byte integer: b'BBBBBBBB'
+[stack]         0x7fffffffd958 0x4242424242424242 ('BBBBBBBB')
+[stack]         0x7fffffffda40 'BBBBBBBB\n'
+-2
+
+-3
+[stack]         0x7fffffffd9b0 'BBBBBBBB\n'
+
+-4
+[stack]         0x7fffffffd968 'BBBBBBBB\n'

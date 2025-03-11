@@ -1,0 +1,18 @@
+FROM ubuntu:23.10
+
+RUN sed -i 's|http://.*ubuntu.com/ubuntu|http://old-releases.ubuntu.com/ubuntu|' /etc/apt/sources.list && apt update && apt upgrade
+
+RUN apt-get update && apt-get install -y libpng-dev git python3 gdb procps
+
+RUN git clone https://github.com/pwndbg/pwndbg
+RUN chmod +x /pwndbg/setup.sh
+RUN cd /pwndbg ; ./setup.sh
+
+WORKDIR /app/
+
+COPY einstein /app/
+
+COPY ynetd /app/
+
+EXPOSE 1337
+CMD /app/ynetd -p 1337 /app/einstein

