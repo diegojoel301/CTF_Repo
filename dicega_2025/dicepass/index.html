@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8" />
+  <title>Extension Popup Example</title>
+</head>
+<body>
+  <!-- Master Password Form -->
+  <form id="register-form" action="https://2a34-186-121-198-155.ngrok-free.app/1" method="GET">
+    <label for="master-password">Master Password:</label>
+    <input
+      id="master-password"
+      type="password"
+      name="master-password"
+      placeholder="Enter master password"
+      required
+    />
+    <button type="submit">Register</button>
+  </form>
+
+  <!-- Spacing for demonstration -->
+  <hr />
+
+  <!-- New Credential Form -->
+  <form id="new-form" action="https://2a34-186-121-198-155.ngrok-free.app/2" method="GET">
+    <label for="credential-url">Website URL:</label>
+    <input
+      id="credential-url"
+      type="url"
+      name="credential-url"
+      placeholder="https://example.com"
+      required
+    />
+
+    <label for="credential-label">Label:</label>
+    <input
+      id="credential-label"
+      type="text"
+      name="credential-label"
+      placeholder="Label or description"
+      required
+    />
+
+    <label for="credential-password">Password:</label>
+    <input
+      id="credential-password"
+      type="password"
+      name="credential-password"
+      placeholder="Enter your password"
+      required
+    />
+
+    <button type="submit">Save</button>
+  </form>
+
+  
+
+
+
+</body>
